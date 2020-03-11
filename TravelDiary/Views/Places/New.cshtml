@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Add a New Entry</title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+  </head>
+  <body>
+    <div class="container text-center">
+      <h2>Oh, the Places You'll Go!</h2>
+      <br>
+      <h4>Tell me more:</h4>
+      <form action="/places" method="post">
+        <label for="cityName">City name: </label>
+        <input id="cityName" name="cityName" type="text">
+
+        <label for="country">Country: </label>
+        <input id="country" name="country" type="text">
+
+        <label for="duration">Length of stay: </label>
+        <input id="duration" name="duration" type="text">
+        <hr>
+        <label for="favorite">Your favorite part:</label>
+        <input id="favorite" name="favorite" type="text">
+        <hr>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>
