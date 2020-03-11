@@ -7,9 +7,9 @@ namespace TravelDiary.Controllers
   public class PlacesController : Controller
   {
     [HttpPost("/places")]
-    public ActionResult Create(string cityName)
+    public ActionResult Create(string cityName, string country, string duration, string activity)
     {
-      Place newPlace = new Place(cityName);
+      Place newPlace = new Place(cityName, country, duration, activity);
       return RedirectToAction("Index");
     }
 
@@ -18,6 +18,7 @@ namespace TravelDiary.Controllers
     {
       return View();
     }
+    
     [HttpGet("/places/new")]
     public ActionResult New()
     {
