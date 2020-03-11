@@ -10,20 +10,21 @@
     <div class="container text-center">
       <h2>Past Travels</h2>
       <hr>
-      @if (Model.Count == null)
+      @if (Model.Count == 0)
       {
         <p>Time to get logging!</p>
+        <hr>
       }
       else 
       {
         @foreach (Place place in Model)
         {
-          <p>You went to @place.CityName, @place.Country</p>
-          <p>For @place.Duration days.</p>
-          <p>You thought that your favorite bit was: @place.Activity</p>
+          <p><a href='/places/@place.Id'>@place.CityName, @place.Country</a></p>
           <hr>
         }
       }
+      <hr>
+      <a href='/'>Return to Home</a>
     </div>
   </body>
 </html>
