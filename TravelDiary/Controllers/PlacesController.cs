@@ -18,5 +18,10 @@ namespace TravelDiary.Controllers
     {
       return View();
     }
+    [HttpGet("/places/new")]
+    public ActionResult New()
+    {
+      return View();
+    }
   }
 }
