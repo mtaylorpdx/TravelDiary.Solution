@@ -7,8 +7,9 @@ namespace TravelDiary.Models
     public string CityName { get; set; }
     private static List<Place> _instances = new List<Place> {};
 
-    public Place()
+    public Place(string cityName)
     {
+      CityName = cityName;
       _instances.Add(this);
     }
 
