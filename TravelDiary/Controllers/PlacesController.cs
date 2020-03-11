@@ -16,7 +16,8 @@ namespace TravelDiary.Controllers
     [HttpGet("/places")]
     public ActionResult Index()
     {
-      return View();
+      List<Place> placesList = Place.GetAll();
+      return View(placesList);
     }
     
     [HttpGet("/places/new")]
