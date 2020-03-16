@@ -88,6 +88,30 @@ namespace TravelDiary.Models
       cmd.ExecuteNonQuery();
       Id = (int) cmd.LastInsertedId;
 
+      cmd.CommandText = @"INSERT INTO places (country) VALUES (@Country);";
+      MySqlParameter country = new MySqlParameter();
+      country.ParameterName = "@PlaceCountry";
+      country.Value = this.Country;
+      cmd.Parameters.Add(country);    
+      cmd.ExecuteNonQuery();
+      Id = (int) cmd.LastInsertedId;
+
+      cmd.CommandText = @"INSERT INTO places (duration) VALUES (@Duration);";
+      MySqlParameter duration = new MySqlParameter();
+      duration.ParameterName = "@PlaceDuration";
+      duration.Value = this.Duration;
+      cmd.Parameters.Add(duration);    
+      cmd.ExecuteNonQuery();
+      Id = (int) cmd.LastInsertedId;
+
+      cmd.CommandText = @"INSERT INTO places (activity) VALUES (@Activity);";
+      MySqlParameter activity = new MySqlParameter();
+      activity.ParameterName = "@PlaceActivity";
+      activity.Value = this.Activity;
+      cmd.Parameters.Add(activity);    
+      cmd.ExecuteNonQuery();
+      Id = (int) cmd.LastInsertedId;
+
       // End new code
 
       conn.Close();

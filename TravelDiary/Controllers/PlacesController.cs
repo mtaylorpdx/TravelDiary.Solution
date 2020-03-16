@@ -10,6 +10,7 @@ namespace TravelDiary.Controllers
     public ActionResult Create(string city, string country, string duration, string activity)
     {
       Place newPlace = new Place(city, country, duration, activity);
+      newPlace.Save();
       return RedirectToAction("Index");
     }
 
