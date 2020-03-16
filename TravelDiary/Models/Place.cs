@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using MySql.Data.MySqlClient;
 
 namespace TravelDiary.Models
 {
@@ -17,8 +18,6 @@ namespace TravelDiary.Models
       Country = country;
       Duration = duration;
       Activity = activity;
-      _instances.Add(this);
-      Id = _instances.Count;
     }
 
     public static List<Place> GetAll()
@@ -27,11 +26,10 @@ namespace TravelDiary.Models
     }
     public static void ClearAll()
     {
-      _instances.Clear();
     }
     public static Place Find(int searchId)
     {
-      return _instances[searchId-1];
+      return null;
     }
 
     
