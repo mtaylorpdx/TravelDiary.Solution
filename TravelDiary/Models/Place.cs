@@ -71,5 +71,30 @@ namespace TravelDiary.Models
     {
       return null;
     }
+
+    public void Save()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+
+      // Begin new code
+
+      cmd.CommandText = @"INSERT INTO places (cityName) VALUES (@CityName);";
+      MySqlParameter cityName = new MySqlParameter();
+      cityName.ParameterName = "@PlaceCityName";
+      cityName.Value = this.CityName;
+      cmd.Parameters.Add(cityName);    
+      cmd.ExecuteNonQuery();
+      Id = (int) cmd.LastInsertedId;
+
+      // End new code
+
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
   }
 }
