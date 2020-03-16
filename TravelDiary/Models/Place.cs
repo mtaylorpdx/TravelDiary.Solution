@@ -5,23 +5,23 @@ namespace TravelDiary.Models
 {
   public class Place
   {
-    public string CityName {get;set;}
+    public string City {get;set;}
     public string Country {get;set;}
     public string Duration {get;set;}
     public string Activity {get;set;}
     public int Id {get;set;}
     private static List<Place> _instances = new List<Place> {};
 
-    public Place(string cityName, string country, string duration, string activity)
+    public Place(string city, string country, string duration, string activity)
     {
-      CityName = cityName;
+      City = city;
       Country = country;
       Duration = duration;
       Activity = activity;
     }
-      public Place(string cityName, string country, string duration, string activity, int id)
+      public Place(string city, string country, string duration, string activity, int id)
     {
-      CityName = cityName;
+      City = city;
       Country = country;
       Duration = duration;
       Activity = activity;
@@ -39,11 +39,11 @@ namespace TravelDiary.Models
       while (rdr.Read())
       {
         int placeId = rdr.GetInt32(0);
-        string placeCityName = rdr.GetString(1);
+        string placeCity = rdr.GetString(1);
         string placeCountry = rdr.GetString(2);
         string placeDuration = rdr.GetString(3);
         string placeActivity = rdr.GetString(4);
-        Place newPlace = new Place(placeCityName, placeCountry, placeDuration, placeActivity, placeId);
+        Place newPlace = new Place(placeCity, placeCountry, placeDuration, placeActivity, placeId);
       }
       conn.Close();
       if (conn != null)
@@ -80,11 +80,11 @@ namespace TravelDiary.Models
 
       // Begin new code
 
-      cmd.CommandText = @"INSERT INTO places (cityName) VALUES (@CityName);";
-      MySqlParameter cityName = new MySqlParameter();
-      cityName.ParameterName = "@PlaceCityName";
-      cityName.Value = this.CityName;
-      cmd.Parameters.Add(cityName);    
+      cmd.CommandText = @"INSERT INTO places (city) VALUES (@City);";
+      MySqlParameter city = new MySqlParameter();
+      city.ParameterName = "@PlaceCity";
+      city.Value = this.City;
+      cmd.Parameters.Add(city);    
       cmd.ExecuteNonQuery();
       Id = (int) cmd.LastInsertedId;
 
