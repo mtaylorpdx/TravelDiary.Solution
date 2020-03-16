@@ -117,30 +117,30 @@ namespace TravelDiary.Models
 
       // Begin new code
 
-      cmd.CommandText = @"INSERT INTO places (city) VALUES (@PlaceCity);";
+      cmd.CommandText = @"INSERT INTO places (city) VALUES (@City);";
       MySqlParameter city = new MySqlParameter();
-      city.ParameterName = "@PlaceCity";
+      city.ParameterName = "@City";
       city.Value = this.City;
       cmd.Parameters.Add(city);    
       cmd.ExecuteNonQuery();
 
-      cmd.CommandText = @"INSERT INTO places (country) VALUES (@PlaceCountry);";
+      cmd.CommandText = @"INSERT INTO places (country) VALUES (@Country);";
       MySqlParameter country = new MySqlParameter();
-      country.ParameterName = "@PlaceCountry";
+      country.ParameterName = "@Country";
       country.Value = this.Country;
       cmd.Parameters.Add(country);    
       cmd.ExecuteNonQuery();
 
-      cmd.CommandText = @"INSERT INTO places (duration) VALUES (@PlaceDuration);";
+      cmd.CommandText = @"INSERT INTO places (duration) VALUES (@Duration);";
       MySqlParameter duration = new MySqlParameter();
-      duration.ParameterName = "@PlaceDuration";
+      duration.ParameterName = "@Duration";
       duration.Value = this.Duration;
       cmd.Parameters.Add(duration);    
       cmd.ExecuteNonQuery();
 
-      cmd.CommandText = @"INSERT INTO places (activity) VALUES (@PlaceActivity);";
+      cmd.CommandText = @"INSERT INTO places (activity) VALUES (@Activity);";
       MySqlParameter activity = new MySqlParameter();
-      activity.ParameterName = "@PlaceActivity";
+      activity.ParameterName = "@Activity";
       activity.Value = this.Activity;
       cmd.Parameters.Add(activity);    
       cmd.ExecuteNonQuery();
