@@ -67,9 +67,46 @@ namespace TravelDiary.Models
       }
     }
 
-    public static Place Find(int searchId)
+    public static Place Find(int id)
     {
-      return null;
+      // We open a connection.
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+
+      // We create MySqlCommand object and add a query to its CommandText property. We always need to do this to make a SQL query.
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM `places` WHERE id = @thisId;";
+
+      // We have to use parameter placeholders (@thisId) and a `MySqlParameter` object to prevent SQL injection attacks. This is only necessary when we are passing parameters into a query. We also did this with our Save() method.
+      MySqlParameter thisId = new MySqlParameter();
+      thisId.ParameterName = "@thisId";
+      thisId.Value = id;
+      cmd.Parameters.Add(thisId);
+
+      // We use the ExecuteReader() method because our query will be returning results and we need this method to read these results. This is in contrast to the ExecuteNonQuery() method, which we use for SQL commands that don't return results like our Save() method.
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+      int placeId = 0;
+      string placeCity = "";
+      string placeCountry = "";
+      string placeDuration = "";
+      string placeActivity = "";
+      while (rdr.Read())
+      {
+        placeId = rdr.GetInt32(0);
+        placeCity = rdr.GetString(1);
+        placeCountry = rdr.GetString(2);
+        placeDuration = rdr.GetString(3);
+        placeActivity = rdr.GetString(4);
+      }
+      Place foundPlace= new Place(placeCity, placeCountry, placeDuration, placeActivity, placeId);
+
+      // We close the connection.
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return foundPlace;
     }
 
     public void Save()
@@ -80,31 +117,28 @@ namespace TravelDiary.Models
 
       // Begin new code
 
-      cmd.CommandText = @"INSERT INTO places (city) VALUES (@City);";
+      cmd.CommandText = @"INSERT INTO places (city) VALUES (@PlaceCity);";
       MySqlParameter city = new MySqlParameter();
       city.ParameterName = "@PlaceCity";
       city.Value = this.City;
       cmd.Parameters.Add(city);    
       cmd.ExecuteNonQuery();
-      Id = (int) cmd.LastInsertedId;
 
-      cmd.CommandText = @"INSERT INTO places (country) VALUES (@Country);";
+      cmd.CommandText = @"INSERT INTO places (country) VALUES (@PlaceCountry);";
       MySqlParameter country = new MySqlParameter();
       country.ParameterName = "@PlaceCountry";
       country.Value = this.Country;
       cmd.Parameters.Add(country);    
       cmd.ExecuteNonQuery();
-      Id = (int) cmd.LastInsertedId;
 
-      cmd.CommandText = @"INSERT INTO places (duration) VALUES (@Duration);";
+      cmd.CommandText = @"INSERT INTO places (duration) VALUES (@PlaceDuration);";
       MySqlParameter duration = new MySqlParameter();
       duration.ParameterName = "@PlaceDuration";
       duration.Value = this.Duration;
       cmd.Parameters.Add(duration);    
       cmd.ExecuteNonQuery();
-      Id = (int) cmd.LastInsertedId;
 
-      cmd.CommandText = @"INSERT INTO places (activity) VALUES (@Activity);";
+      cmd.CommandText = @"INSERT INTO places (activity) VALUES (@PlaceActivity);";
       MySqlParameter activity = new MySqlParameter();
       activity.ParameterName = "@PlaceActivity";
       activity.Value = this.Activity;
